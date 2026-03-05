@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!--
+  LIBRARY MANAGEMENT SYSTEM
+  Built by: Sneh Desai
+  -----------------------------------------------
+  FILE 1 of 4: library_index.html
+  This file contains ONLY the structure (HTML).
+  It links to library_style.css and library_script.js
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Library Management System | Sneh Desai</title>
+
+  <!-- LINKING THE CSS FILE -->
+  <link rel="stylesheet" href="library_style.css" />
+</head>
+<body>
+
+  <!-- TOP HEADER -->
+  <header>
+    <div class="header-left">
+      <h1>📚 Library Management System</h1>
+      <p>Built by Sneh Desai — University of Regina</p>
+    </div>
+    <div class="header-badge">Computer Science Project</div>
+  </header>
+
+  <div class="container">
+
+    <!-- SUMMARY CARDS -->
+    <div class="summary">
+      <div class="card total">
+        <div class="label">Total Books</div>
+        <div class="amount" id="total-books">0</div>
+        <div class="card-icon">📚</div>
+      </div>
+      <div class="card available">
+        <div class="label">Available</div>
+        <div class="amount" id="available-books">0</div>
+        <div class="card-icon">✅</div>
+      </div>
+      <div class="card borrowed">
+        <div class="label">Borrowed</div>
+        <div class="amount" id="borrowed-books">0</div>
+        <div class="card-icon">📖</div>
+      </div>
+    </div>
+
+    <div class="main-grid">
+
+      <!-- LEFT PANEL: ADD BOOK FORM -->
+      <div class="panel">
+        <h2>➕ Add a Book</h2>
+
+        <div class="form-group">
+          <label for="title">Book Title</label>
+          <input type="text" id="title" placeholder="e.g. Clean Code" maxlength="100"/>
+        </div>
+
+        <div class="form-group">
+          <label for="author">Author</label>
+          <input type="text" id="author" placeholder="e.g. Robert C. Martin" maxlength="100"/>
+        </div>
+
+        <div class="form-group">
+          <label for="genre">Genre</label>
+          <select id="genre">
+            <option value="Technology">Technology</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Classic">Classic</option>
+            <option value="History">History</option>
+            <option value="Self-Help">Self-Help</option>
+            <option value="Science">Science</option>
+            <option value="Fiction">Fiction</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <button class="add-btn" onclick="addBook()">Add Book</button>
+
+        <!-- SEARCH SECTION -->
+        <div class="divider"></div>
+        <h2>🔍 Search Books</h2>
+        <div class="form-group">
+          <label for="search">Title or Author</label>
+          <div class="search-row">
+            <input type="text" id="search" placeholder="e.g. Harry Potter"/>
+            <button class="search-btn" onclick="searchBooks()">Search</button>
+          </div>
+        </div>
+        <button class="clear-btn" onclick="clearSearch()">Show All Books</button>
+      </div>
+
+      <!-- RIGHT PANEL: BOOK LIST -->
+      <div class="panel">
+        <h2>📋 Book Collection</h2>
+
+        <!-- FILTER BUTTONS -->
+        <div class="filter-row">
+          <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+          <button class="filter-btn" onclick="setFilter('available', this)">Available</button>
+          <button class="filter-btn" onclick="setFilter('borrowed', this)">Borrowed</button>
+        </div>
+
+        <!-- BOOK LIST — populated by library_script.js -->
+        <div class="book-list" id="book-list">
+          <div class="empty-state">
+            <div>📭</div>
+            No books yet. Add one!
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FLASH NOTIFICATION -->
+  <div class="flash" id="flash"></div>
+
+  <!-- BORROW / RETURN MODAL -->
+  <div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <h3 id="modal-title">Book Action</h3>
+      <p id="modal-body"></p>
+      <div class="modal-buttons">
+        <button class="confirm-btn" id="modal-confirm" onclick="confirmAction()">Confirm</button>
+        <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LINKING THE JAVASCRIPT FILE — always at the bottom -->
+  <script src="library_script.js"></script>
+
+</body>
+</html>
